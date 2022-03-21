@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import Form from "./Form";
 
 function App() {
+  const [msgList, setMsglist] = useState([]);
+
+  const sendMsg = () => setMsglist(document.write("Ваше сообщение отправлено"));
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    (<Form />),
+    (
+      <div className="App">
+        <h1>Messages</h1>
+        {msgList.map((msg) => (
+          <div>
+            <p key={msg.id}>
+              {msg.author}
+              {msg.text}
+            </p>
+            <button onClick={sendMsg}>Отправить</button>
+          </div>
+        ))}
+      </div>
+    )
   );
 }
-
 export default App;
